@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.env
+tokens.json
+store.json
+*-bridge-config.json
+*-sync-state.json
+payload*.json
+.DS_Store

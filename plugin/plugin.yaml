@@ -1,0 +1,17 @@
+name: gitlab-kanban
+version: 1.0.0
+description: "GitLab <-> Hermes Kanban bridge. Syncs issues and merge requests onto a kanban board, assigns work by role (developer, reviewer, scrum master, QA), and syncs completed tasks back to GitLab. Supports gitlab.com and custom self-managed hosts, with CRUD for issues, merge requests, and milestones."
+provides_tools:
+  - gitlab_kanban_status
+  - gitlab_kanban_config
+  - gitlab_kanban_project
+  - gitlab_kanban_sync
+  - gitlab_kanban_task
+  - gitlab_issue
+  - gitlab_merge_request
+  - gitlab_milestone
+requires_env:
+  GITLAB_TOKEN:
+    description: "GitLab personal or project access token with api scope. Additional hosts use their own token variable, named in the bridge config."
+    url: "https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html"
+    secret: true

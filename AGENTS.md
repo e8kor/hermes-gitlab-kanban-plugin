@@ -169,9 +169,23 @@ only when you are willing to have it act; `--dry-run` first.
 
 ## Working on the live plugin
 
-The live plugin is a symlink to `plugin/`, so edits here are live. Python changes
-need a Hermes restart; skills and docs do not. Sweep changes need the cron job
-re-installed — `hermes gitlab-kanban install-sweep`, then confirm with
+The live plugin is a symlink to `plugin/`, so edits here are live. Verify it,
+because `install.sh` does `rm -rf` + `cp -r` and will happily replace the symlink
+with a stale copy — after which your edits appear to do nothing:
+
+```bash
+ls -ld "$HERMES_HOME/plugins/gitlab-kanban"   # want: -> .../plugin
+```
+
+If it is a directory rather than a symlink, restore it:
+
+```bash
+rm -rf "$HERMES_HOME/plugins/gitlab-kanban"
+ln -s "$PWD/plugin" "$HERMES_HOME/plugins/gitlab-kanban"
+```
+
+Python changes need a Hermes restart; skills and docs do not. Sweep changes need
+the cron job re-installed — `hermes gitlab-kanban install-sweep`, then confirm with
 `hermes cron list`. Webhook changes need the route re-subscribed —
 `hermes gitlab-kanban webhook --install`.
 
